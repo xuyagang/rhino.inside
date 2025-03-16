@@ -13,9 +13,18 @@ namespace RhinoInside.AutoCAD
   // of a given document
   public class TestCommands
   {
+    private static Plugin _plugin;
+
+
     [CommandMethod("TestRhinoInside")]
     public static void TestRhinoInside()
     {
+      //_plugin = new Plugin();
+      //((IExtensionApplication)_plugin).Initialize();
+      //Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\nRhino已启动！\n");
+
+
+
       // RhinoCommon code
       var plane = Rhino.Geometry.Plane.WorldXY;
       var sphere = new Rhino.Geometry.Sphere(plane, 5.0);

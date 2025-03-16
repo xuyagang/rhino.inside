@@ -1,5 +1,6 @@
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
+using Rhino.Runtime.InProcess;
 using System;
 using System.IO;
 using System.Reflection;
@@ -48,7 +49,9 @@ namespace RhinoInside.AutoCAD
       try
       {
         string SchemeName = $"Inside-{HostApplicationServices.Current.Product}-{HostApplicationServices.Current.releaseMarketVersion}";
-        m_rhino_core = new Rhino.Runtime.InProcess.RhinoCore(new[] { $"/scheme={SchemeName}" });
+        m_rhino_core = new Rhino.Runtime.InProcess.RhinoCore(new[] { $"/scheme={SchemeName}" }, Rhino.Runtime.InProcess.WindowStyle.Normal);
+        //RhinoCore.DoIdle() 是一个关键方法，其核心作用是为 Rhino 提供处理 后台任务 和 消息循环 的机会
+        m_rhino_core.DoIdle();
       }
       catch
       {
